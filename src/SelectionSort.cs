@@ -1,30 +1,40 @@
-public class SelectionSort
+using System;
+using System.Linq;
+
+namespace Algorithms
 {
-    public void Run()
+    public class SelectionSort
     {
-        var arr = new int[] { 2, 4, 1, 5, 15, 6, 72, 564, 2, 16, 7, 4, 53, 1 };
-        var lowIndex = 0;
-
-        for (var i = 0; i < arr.Length; i++)
+        public void Run()
         {
-            lowIndex = i;
+            var vals = "42809587245624529085290348320985495234113312345714897587191841573751357183571";
 
-            for (var j = i + 1; j < arr.Length; j++)
+            var arr = vals.Select(x => Convert.ToInt32(x.ToString()))
+                .ToArray();
+
+            var lowIndex = 0;
+
+            for (var i = 0; i < arr.Length; i++)
             {
-                if (arr[j] < arr[lowIndex])
+                lowIndex = i;
+
+                for (var j = i + 1; j < arr.Length; j++)
                 {
-                    lowIndex = j;
+                    if (arr[j] < arr[lowIndex])
+                    {
+                        lowIndex = j;
+                    }
                 }
+
+                var temp = arr[i];
+                arr[i] = arr[lowIndex];
+                arr[lowIndex] = temp;
             }
 
-            var temp = arr[i];
-            arr[i] = arr[lowIndex];
-            arr[lowIndex] = temp;
-        }
-
-        foreach (var i in arr)
-        {
-            System.Console.WriteLine(i);
+            foreach (var i in arr)
+            {
+                System.Console.WriteLine(i);
+            }
         }
     }
 }
